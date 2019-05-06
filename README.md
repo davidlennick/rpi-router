@@ -1,10 +1,9 @@
 # rpi-router
 
-uses a raspberry pi 3 b+ with three ethernet ports (the on-board nic + 2 usb to rj45 adaptors)
+uses a raspberry pi 3 b+ with three ethernet ports (the on-board nic + 2 usb to rj45 adaptors), named:
 
-`wan` -> used by WAN or upstream internet gateway, masqueraded 
-
-`lan` -> used by downstream network, `192.168.9.1`, DHCP on `192.168.9.2 -> 192.168.9.254`, passthrough to WAN
+- `wan` -> used by WAN or upstream internet gateway, masqueraded 
+- `lan` -> used by downstream network, `192.168.9.1`, DHCP on `192.168.9.2 -> 192.168.9.254`, passthrough to WAN
 
 `lab` -> some network, probably should be used for labs and nothing production-ready 
 
