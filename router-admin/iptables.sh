@@ -8,6 +8,8 @@ sed '/lan/d' -i out.bak
 sed '/lab/d' -i out.bak
 sed '/-i lo/d' -i out.bak
 sed '/-o lo/d' -i out.bak
+sed '/-j LOGGING/d' -i out.bak
+
 iptables-restore out.bak
 echo "restoring iptable"
 
@@ -19,6 +21,12 @@ iptables -P FORWARD DROP
 # iptables -P INPUT ACCEPT
 # iptables -P OUTPUT ACCEPT
 # iptables -P FORWARD ACCEPT
+
+# iptables -N LOGGING
+# iptables -A FORWARD -j LOGGING
+# iptables -A LOGGING -m limit --limit 30/min -j LOGGING --log-prefix "[iptable-drop]: " --log-level 4
+# iptables -A LOGGING -j DROP
+
 
 ################################################
 # NAT
@@ -51,6 +59,7 @@ iptables -A FORWARD -i lab -o wan -j ACCEPT
 iptables -A FORWARD -i wan -o lab \
     -m state --state ESTABLISHED,RELATED -j ACCEPT
 
+
 # foward lan -> lab
 iptables -A FORWARD -i lan -o lab -j ACCEPT
 iptables -A FORWARD -i lab -o lan \
@@ -73,7 +82,6 @@ iptables -A OUTPUT -o lab -p tcp --match multiport --sports 53,2375,2376,10000,2
 iptables -A INPUT -i lab -p udp --match multiport --dports 53,67,68 -j ACCEPT
 iptables -A OUTPUT -o lab -p udp --match multiport --sports 53,67,68 -j ACCEPT
 
-
 # iptables -A INPUT -i lan -p tcp -s 192.168.0.0/16 --match multiport --dports 53,2375,2376,10000,22222,48484 -j ACCEPT
 # iptables -A OUTPUT -o lan -p tcp -s 192.168.0.0/16 --match multiport --sports 53,2375,2376,10000,22222,48484 -j ACCEPT
 
@@ -86,6 +94,11 @@ iptables -A OUTPUT -o lan -p tcp --match multiport --sports 53,2375,2376,10000,2
 iptables -A INPUT -i lan -p udp --match multiport --dports 53,67,68 -j ACCEPT
 iptables -A OUTPUT -o lan -p udp --match multiport --sports 53,67,68 -j ACCEPT
 
-iptables -A INPUT -i wlan0 -p tcp --match multiport --dports 2375,2376,10000,22222,48484 -j ACCEPT
-iptables -A OUTPUT -o wlan0 -p tcp --match multiport --sports 2375,2376,10000,22222,48484 -j ACCEPT
 
+################################################
+# Port Forwarding
+################################################
+
+# example
+# iptables -A PREROUTING -t nat -i wan -p tcp --dport 30001 -j DNAT --to 10.0.0.178:30001
+# iptables -A FORWARD -p tcp -d 10.0.0.178 --dport 30001 -j ACCEPT
