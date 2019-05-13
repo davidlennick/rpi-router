@@ -8,11 +8,8 @@ sed '/lan/d' -i out.bak
 sed '/lab/d' -i out.bak
 sed '/-i lo/d' -i out.bak
 sed '/-o lo/d' -i out.bak
-<<<<<<< HEAD
 sed '/-j LOGGING/d' -i out.bak
 
-=======
->>>>>>> ebc76a1fcb8dd69c6cc86c358889a1b0b7798f73
 iptables-restore out.bak
 echo "restoring iptable"
 
@@ -25,15 +22,12 @@ iptables -P FORWARD DROP
 # iptables -P OUTPUT ACCEPT
 # iptables -P FORWARD ACCEPT
 
-<<<<<<< HEAD
 # iptables -N LOGGING
 # iptables -A FORWARD -j LOGGING
 # iptables -A LOGGING -m limit --limit 30/min -j LOGGING --log-prefix "[iptable-drop]: " --log-level 4
 # iptables -A LOGGING -j DROP
 
 
-=======
->>>>>>> ebc76a1fcb8dd69c6cc86c358889a1b0b7798f73
 ################################################
 # NAT
 ################################################
