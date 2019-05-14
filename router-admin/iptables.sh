@@ -92,4 +92,3 @@ iptables -A OUTPUT -o wlan0 -p tcp --match multiport --sports 2375,2376,10000,22
 # example
 # iptables -A PREROUTING -t nat -i wan -p tcp --dport 30001 -j DNAT --to 10.0.0.178:30001
 # iptables -A FORWARD -p tcp -d 10.0.0.178 --dport 30001 -j ACCEPT
-
