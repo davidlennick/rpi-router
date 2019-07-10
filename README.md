@@ -4,8 +4,7 @@ uses a raspberry pi 3 b+ with three ethernet ports (the on-board nic + 2 usb to 
 
 - `wan` -> used by WAN or upstream internet gateway, masqueraded 
 - `lan` -> used by downstream network, `192.168.9.1`, DHCP on `192.168.9.2 -> 192.168.9.254`, passthrough to WAN
-
-`lab` -> some network, probably should be used for labs and nothing production-ready 
+- `lab` -> some network, probably should be used for labs and nothing production-ready 
 
 from your local machine:
 
@@ -15,12 +14,6 @@ sudo balena local scan
 sudo balena push <ip> -s .
 ```
 
-```
-ssh root@<ip> -p 22222
-
-# kill balenaOS dnsmasq instance after the build is complete
-kill $(ps | egrep -m 1 dns |  awk '{ print $1; }') 
-```
 
 ## setup
 ```
@@ -51,4 +44,6 @@ modem --- wan if --- rpi --- lan if --- lan
 - `lan` and `lab` have a DHCP server attached to them, provisioning from `192.168.9.2 -> 192.168.9.254` and `10.0.0.2 -> 10.0.0.254` 
 
 
-### dyndns
+### ddns
+
+- uses https://www.duckdns.org/ 
