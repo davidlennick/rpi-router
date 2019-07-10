@@ -36,14 +36,15 @@ services:
       - "67:67/udp"
       - "68:68/udp"
 
-  dyndns:
-    build: ./dyndns
+  ddns:
+    build: ./ddns
+    network_mode: host 
     environment: 
-      - NOIP_UN="user"
-      - NOIP_PW="pass"
-      - NOIP_DOMAINS="domain"
-      - NOIP_INTERVAL="15m"
-      - LOG_DIR="/app"
+      - DUCKDNS_TOKEN=<TOKEN>
+      - DUCKDNS_DOMAINS=<HOST>
+      - DUCKDNS_INTERVAL=5
+      - LOG_DIR=/app/duckdns
+
 
 
     
