@@ -4,12 +4,12 @@ FROM debian:latest
 # https://askubuntu.com/questions/916199/install-apt-show-versions-inside-an-ubuntu-docker-container
 RUN apt-get update && rm /etc/apt/apt.conf.d/docker-gzip-indexes
 RUN apt-get purge apt-show-versions && rm /var/lib/apt/lists/*lz4
-RUN apt-get -o Acquire::GzipIndexes=false update && apt-get install -y wget apt-show-versions
+RUN apt-get -o Acquire::GzipIndexes=false update && apt-get install -y wget apt-show-versions gnupg
 
 
 # webmin
 RUN sh -c 'echo "deb http://download.webmin.com/download/repository sarge contrib" > /etc/apt/sources.list.d/webmin.list'
-RUN wget -qO - http://www.webmin.com/jcameron-key.asc | sudo apt-key add -
+RUN wget -qO - http://www.webmin.com/jcameron-key.asc | apt-key add -
 
 RUN apt-get update && apt-get install -y openssl perl libnet-ssleay-perl \
   libauthen-pam-perl libpam-runtime libio-pty-perl python python3

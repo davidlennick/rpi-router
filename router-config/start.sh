@@ -15,6 +15,3 @@ ip addr add 192.168.9.1/24 brd 192.168.9.255 dev lan
 echo "Setting wan MTU"
 ip link set wan mtu 1500
 #ip link set wan mtu 1492
-echo "Starting webmin..."
-service webmin start 
-tail -F /var/webmin/miniserv.error
