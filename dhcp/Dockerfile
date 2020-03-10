@@ -1,5 +1,4 @@
-ARG BASE=balenalib/raspberrypi3-alpine
-FROM ${BASE}
+FROM alpine:latest
 
 RUN apk update && apk --no-cache add dnsmasq 
 

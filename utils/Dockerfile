@@ -1,4 +1,4 @@
-FROM balenalib/raspberrypi3-ubuntu
+FROM ubuntu:latest
 
 #RUN systemctl status dnsmasq
 

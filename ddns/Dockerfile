@@ -1,5 +1,5 @@
-ARG BASE="balenalib/raspberrypi3-alpine"
-FROM ${BASE}
+FROM alpine:latest
+
 
 ENV DUCKDNS_TOKEN=""
 ENV DUCKDNS_DOMAINS=""
