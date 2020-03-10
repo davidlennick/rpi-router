@@ -16,7 +16,7 @@ if __name__ == '__main__':
             res = f.read().rstrip()
             if_mac[i] = res
     
-    for i,mac in if_mac.items():
+    for i, mac in if_mac.items():
         cmd = 'ip link set {0} down && ip link set {0} name {1} && ip link set {1} up'
         if mac.lower() == wan_mac.lower():
             subprocess.call(cmd.format(i, 'wan'), shell=True)
