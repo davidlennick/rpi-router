@@ -29,8 +29,6 @@ RUN sed -i 's/direct=0/direct=1/g' /etc/webmin/firewall/config
 
 RUN mkdir /app
 COPY start.sh /app
-COPY fixeth.py /app
-COPY iptables.sh /app
 
 EXPOSE 10000
 
